@@ -1,0 +1,15 @@
+export const options = [
+    { value: "Github", label: "Github" },
+    { value: "Frontend Mentor", label: "Frontend Mentor" },
+    { value: "Twitter", label: "Twitter" },
+    { value: "LinkedIn", label: "LinkedIn" },
+    { value: "YouTube", label: "YouTube" },
+    { value: "Facebook", label: "Facebook" },
+    { value: "Twitch", label: "Twitch" },
+    { value: "Dev.to", label: "Dev.to" },
+    { value: "Codewars", label: "Codewars" },
+    { value: "freecodecamp", label: "freecodecamp" },
+    { value: "GitLab", label: "GitLab" },
+    { value: "Hashnode", label: "Hashnode" },
+    { value: "Stack Overflow", label: "Stack Overflow" },
+  ];
