@@ -14,6 +14,27 @@ interface CustomSelectProps {
   isMulti?: boolean;
 }
 
+const customStyles: StylesConfig<OptionType, false> = {
+  control: (provided) => ({
+    ...provided,
+    // padding: "10px", // Increase the inner padding of the select
+    borderRadius: "8px", // Optional: Adjust border radius
+  }),
+  // valueContainer: (provided) => ({
+  //   ...provided,
+  //   padding: "12px", // Increase padding inside the input field
+  // }),
+  input: (provided) => ({
+    ...provided,
+    padding: "7px", // Adjust input padding inside the select
+    // border: "1px solid red"
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    padding: "10px", // Add padding to selected option
+  }),
+};
+
 const CustomSelect: React.FC<CustomSelectProps> = ({
   options,
   selectedOption,
@@ -36,6 +57,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
       isMulti={isMulti}
       className="w-full"
       instanceId="custom-select"
+      styles={customStyles} // Apply custom styles 
     />
   );
 };

@@ -1,20 +1,24 @@
+import { cn } from "@/lib/utils";
+
 interface Form {
   placeholder: string;
   value: string;
-  width: string;
   type: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string
+  className?: string
 }
 
-const Input = ({ placeholder, value, width, type, handleChange }: Form) => {
+const Input = ({ placeholder, value, className, type, handleChange, name }: Form) => {
   return (
-    <div className={`relative ${width} rounded-[8px]`}>
+    <div className={`relative inline-block rounded-[8px]`}>
       <input
-        className="py-2 w-full px-4 border border-darkolivegreen-100 font-[400] rounded-[4px] text-[16px] outline-none focus:shadow-2xl"
+        className={cn("py-3 w-full px-4 border font-[400] rounded-[8px] text-[16px] outline-none focus:shadow-2xl", className)}
         type={type}
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
+        name={name}
       />
     </div>
   );
