@@ -14,29 +14,47 @@ import Input from "./components/ui/Input/input";
 import { useFormContext } from "@/context/formContext";
 
 export default function Home() {
-  // const [formLink, setFormLink] = useState<formData[]>([]);
   const { formLink, setFormLink } = useFormContext()
 
   const [selectedOption, setSelectedOption] = useState<OptionType>(options[0]);
-
   const handleNewForm = () => {
     setFormLink([...formLink, { LinkName: selectedOption.value, LinkPath: "" }]);
   };
 
-  const handleChange = (e: { target: { value: string; name: string } }) => {
+  const handleChange = (e: { target: { value: string; name: string } }, id: number) => {
+    console.log(id)
     const { value, name } = e.target;
-    console.log(value, name);
-    // const newForm = { ...formLink, [name]: value}
-    // setFormLink(newForm)
+    const newForm = formLink.map((item, index)=> {
+      if(index === id){
+        return(
+          { ...item, [name]: value}
+        )
+      } else{
+        return item
+      }
+    })
+    setFormLink(newForm)
   };
 
-  const handleSelect = (selected: OptionType | null) => {
+  const handleSave = () => {
+    localStorage.setItem("links", JSON.stringify(formLink))
+  }
+
+  const handleSelect = (selected: OptionType | null, id: number) => {
     if (!selected) {
       console.log("Invalid input: Please select a transaction status.");
       return;
     }
     setSelectedOption(selected);
-    console.log(selectedOption);
+    
+    const newSelect = formLink.map((item, index) => {
+      if(index === id){
+        return {...item, LinkName: selected.value}
+      } else{
+        return item
+      }
+    })
+    setFormLink(newSelect)
   };
   return (
     <div className="min-h-screen bg-White">
@@ -66,14 +84,14 @@ export default function Home() {
                 <div>
                   <CustomLabel text="Platform" />
                   <CustomSelect
-                    selectedOption={selectedOption ? selectedOption : null}
-                    handleChange={handleSelect}
+                    selectedOption={options.find((opt) => opt.value === item.LinkName) || null}
+                    handleChange={(selected) => handleSelect(selected, index)}
                     options={options}
                   />
                 </div>
                 <div>
                   <CustomLabel text="Link" />
-                  <Input type="text" handleChange={handleChange} name="LinkPath" placeholder={""} value={item.LinkPath} className="w-[255px] border border-Borders" />
+                  <Input type="text" handleChange={(e) => handleChange(e, index)} name="LinkPath" placeholder={""} value={item.LinkPath} className="w-[255px] border border-Borders" />
                 </div>
               </div>
               )
@@ -89,7 +107,7 @@ export default function Home() {
         </div>
       </div>
       <div className="p-4">
-        <CustomButton className="w-[311px]">Save</CustomButton>
+        <CustomButton onClick={handleSave} className="w-[311px]">Save</CustomButton>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 "use client"
 
 import { formData, profileData } from "@/lib/types";
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 interface FormProps {
   formLink: formData[];
@@ -14,6 +14,15 @@ const FormContext = createContext<FormProps | undefined>(undefined);
 
 export const FormContextProvider = ({ children }: { children: ReactNode }) => {
   const [formLink, setFormLink] = useState<formData[]>([]);
+
+  useEffect(()=> {
+    const storedLinks = localStorage.getItem("links")
+    if(storedLinks){
+      const saveLink = JSON.parse(storedLinks)
+      console.log(saveLink)
+      setFormLink(saveLink)
+    }
+  }, [])
   
   const [profileDetails, setProfileDetails] = useState<profileData>({
     image: "",
