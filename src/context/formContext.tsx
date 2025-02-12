@@ -31,6 +31,14 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
     email: ""
   });
 
+  useEffect(()=> {
+    const profileDetails = localStorage.getItem("profile")
+    if(profileDetails){
+      const saveLink = JSON.parse(profileDetails)
+      setProfileDetails(saveLink)
+    }
+  }, [])
+
   return(
     <FormContext.Provider value={{ formLink, setFormLink, profileDetails, setProfileDetails }}>
       {children}

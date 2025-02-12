@@ -27,7 +27,7 @@ const Navbar = () => {
           <Link href="/" className="w-[10%]">
             <Image alt="Home" src={secondImage} className="w-full" />
           </Link>
-          <Link href="/profileDetails" className="w-[10%]">
+          <Link href="/profile" className="w-[10%]">
             <Image alt="pr" src={thirdImage} className="w-full" />
           </Link>
           <Link href="/preview" className="w-[10%]">

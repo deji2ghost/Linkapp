@@ -6,7 +6,7 @@ import CustomButton from "../components/ui/Button/customButton";
 import CustomLabel from "../components/ui/CustomLabel/CustomLabel";
 import { useFormContext } from "@/context/formContext";
 
-const ProfilePage = () => {
+const Profile = () => {
   const { profileDetails, setProfileDetails } = useFormContext()
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,13 +16,18 @@ const ProfilePage = () => {
     }
   };
 
-  const handleChange= (e) => {
+  const handleChange= (e: { target: { value: string; name: string } },) => {
     const { name, value } = e.target
     setProfileDetails({
       ...profileDetails,
       [name]: value
     })
   }
+
+  const saveProfile = () => {
+    localStorage.setItem("profile", JSON.stringify(profileDetails))
+  }
+
   return (
     <div className="min-h-screen bg-White">
       <div className="border-b border-Borders p-6 flex flex-col gap-10">
@@ -59,10 +64,10 @@ const ProfilePage = () => {
         </div>
       </div>
       <div className="p-4">
-        <CustomButton className="w-[311px]">Save</CustomButton>
+        <CustomButton onClick={saveProfile} className="w-[311px]">Save</CustomButton>
       </div>
     </div>
   );
 };
 
-export default ProfilePage;
+export default Profile;
